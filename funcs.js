@@ -1,35 +1,76 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { argv } from "process";
 
-export function createFile(BaseName) {
-    BaseName = argv[3];
-    fs.writeFileSync(`${BaseName}`, "");
+export async function createFile(BaseName) {
+    try {
+        BaseName = argv[3];
+        fs.writeFile(`${BaseName}`, "");
+    } catch (err) {
+        console.error("Error: ", err)
+    }
 };
 
-export function createFolder(BaseName) {
-    BaseName = argv[3];
-    fs.mkdirSync(`${BaseName}`, { recursive: true });
-}
-
-export function readFile(BaseName) {
-    BaseName = argv[3];
-    Content = fs.readFileSync(`${BaseName}`, "utf-8");
-    console.log(Content)
-}
-
-export function deleteIt(BaseName) {
-    BaseName = argv[3];
-    fs.unlink(`${BaseName}`);
+export async function createFolder(BaseName) {
+    try {
+        BaseName = argv[3];
+        fs.mkdir(`${BaseName}`, { recursive: true });
+    } catch (err) {
+        console.error("Error: ", err)
+    }
 };
 
-export function writeTo(BaseName) {
-    BaseName = argv[3];
-    Content = argv[4];
-    fs.writeFileFileSync(`${BaseName}`, `${Content}`);
-}
+export async function readFile(BaseName) {
+    try {
+        BaseName = argv[3];
+        let Content = await fs.readFile(`${BaseName}`, "utf-8");
+        console.log(Content)
+    } catch (err) {
+        console.error("Error: ", err)
+    }
+};
 
-export function append(BaseName) {
-    BaseName = argv[3];
-    Content = argv[4];
-    fs.appendFileSync(`${BaseName}`, `${Content}`);
-}
+export async function readTwoAndWrite() {
+    try {
+        let fileOne = argv[3]
+        let fileTwo = argv[4]
+        let Content = argv[5]
+        let fileOneContent = await fs.readFile(`${fileOne}`, "utf-8");
+        let fileTwoContent = await fs.readFile(`${fileTwo}`, "utf-8");
+        console.log(fileOneContent)
+        console.log(fileTwoContent)
+
+        fs.writeFile(`${fileOne}`, `${Content}`);
+        fs.writeFile(`${fileTwo}`, `${Content}`);
+    } catch (err) {
+        console.error("Error: ", err)
+    }
+};
+
+export async function deleteIt(BaseName) {
+    try {
+        BaseName = argv[3];
+        fs.unlink(`${BaseName}`);
+    } catch (err) {
+        console.error("Error: ", err)
+    }
+};
+
+export async function writeTo(BaseName) {
+    try {
+        BaseName = argv[3];
+        let Content = argv[4];
+        fs.writeFile(`${BaseName}`, `${Content}`);
+    } catch (err) {
+        console.error("Error: ", err)
+    }
+};
+
+export async function append(BaseName) {
+    try {
+        BaseName = argv[3];
+        let Content = argv[4];
+        fs.appendFile(`${BaseName}`, `${Content}`);
+    } catch (err) {
+        console.error("Error: ", err)
+    }
+};

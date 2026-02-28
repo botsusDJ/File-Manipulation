@@ -1,5 +1,5 @@
 import { argv } from "process";
-import { createFile, createFolder, readFile, writeTo, append, deleteIt } from "./funcs.js";
+import { createFile, createFolder, readFile, writeTo, append, deleteIt, readTwoAndWrite } from "./funcs.js";
 
 let BaseName;
 
@@ -22,4 +22,7 @@ switch (argv[2]) {
     case "delete":
         deleteIt(BaseName)
         break
-}
+    case "readTwoAndWrite":
+        readTwoAndWrite()
+        break
+};
