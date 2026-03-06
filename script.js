@@ -1,5 +1,5 @@
 import { argv } from "process";
-import { createFile, createFolder, readFile, writeTo, append, deleteIt, readTwoAndWrite } from "./funcs.js";
+import { createFile, createFolder, readFile, writeTo, append, deleteIt, readTwoAndWrite, readAllStrict, readAllSoft } from "./funcs.js";
 
 let BaseName;
 
@@ -24,5 +24,11 @@ switch (argv[2]) {
         break
     case "readTwoAndWrite":
         readTwoAndWrite()
+        break
+    case "readAllStrict":
+        readAllStrict()
+        break
+    case "readAllSoft":
+        readAllSoft()
         break
 };

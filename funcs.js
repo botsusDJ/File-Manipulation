@@ -74,3 +74,43 @@ export async function append(BaseName) {
         console.error("Error: ", err)
     }
 };
+
+
+export async function readAllStrict() {
+    try {
+        let fileOne = argv[3]
+        let fileTwo = argv[4]
+        let fileThree = argv[5]
+        let fileOneContent = await fs.readFile(`${fileOne}`, "utf-8");
+        let fileTwoContent = await fs.readFile(`${fileTwo}`, "utf-8");
+        let fileThreeContent = await fs.readFile(`${fileThree}`, "utf-8");
+
+        console.log(fileOneContent + fileTwoContent + fileThreeContent);
+    } catch (err) {
+        console.error("Error: ", err);
+    }
+};
+
+export async function readAllSoft() {
+    let fileOne = argv[3]
+    let fileTwo = argv[4]
+    let fileThree = argv[5]
+
+    let AllContent = ""
+
+    try {
+        let fileOneContent = await fs.readFile(`${fileOne}`, "utf-8");
+        AllContent += fileOneContent
+    }
+    catch (err) {}
+    try {
+        let fileTwoContent = await fs.readFile(`${fileTwo}`, "utf-8");
+        AllContent += fileTwoContent
+    } catch (err) {}
+    try {
+        let fileThreeContent = await fs.readFile(`${fileThree}`, "utf-8");
+        AllContent += fileThreeContent
+    } catch (err) {}
+
+    console.log(AllContent);
+};
